@@ -1,4 +1,4 @@
-USE lab_db;
+-- USE lab_db;
 
 /*
 1.建立主表 demo_create_table.sql

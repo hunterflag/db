@@ -4,6 +4,8 @@
     0.3. 欄位名稱: 全小寫, 單詞以 _ 連接、分隔單字 (搭配 myBatis)
     0.4. 其他名稱: 採小駝峰, <分類別><名稱>, 如函數、程序等
 */
+-- ==========================================================================
+-- --------------------------------------------------------------------------
 
 -- USE lab_db;
 
@@ -18,9 +20,10 @@
 3.長度: 
 密碼:
 
+
 */
+-- 表格 ==========================================================================
 -- 表格.建立
-DROP TABLE IF EXISTS Account;
 CREATE TABLE IF NOT EXISTS Account (
 	no				INTEGER			PRIMARY KEY	AUTO_INCREMENT 	COMMENT "序號",
     name			VARCHAR(100) 	NOT NULL					COMMENT "名稱",
@@ -32,13 +35,18 @@ CREATE TABLE IF NOT EXISTS Account (
     modified_time 	TIMESTAMP		NOT NULL 	DEFAULT  CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT "最後異動時間"
 );
 
--- 資料.新增
+-- 表格.刪除
+DROP TABLE IF EXISTS Account;
 
--- initialize data 初始資料
+-- 資料 ==========================================================================
+-- 資料.新增
+-- 資料.新增.initialize data 初始資料
 INSERT INTO account (name, password, modifiable_flag) VALUES ("root", "root", FALSE);
 INSERT INTO account (name, password, modifiable_flag) VALUES ("guest", "guest", FALSE);
 INSERT INTO account (name, password) VALUES ("tester", "tester");
 INSERT INTO account (name, password) VALUES ("developer", "developer");
+
+-- 資料.新增.test data 測試資料
 INSERT INTO account (name) VALUES ("John");
 INSERT INTO account (name) VALUES ("Frank");
 INSERT INTO account (name) VALUES ("Ken");
@@ -65,8 +73,5 @@ WHERE 1=1
 -- 結束後再開啟
 SET SQL_SAFE_UPDATES=1;
 
--- 表格.資料.清除
+-- 表格.重置資料.清除
 TRUNCATE TABLE Account;
-
--- 表格.刪除
-DROP TABLE IF EXISTS Account;
