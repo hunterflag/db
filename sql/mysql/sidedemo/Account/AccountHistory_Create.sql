@@ -1,4 +1,4 @@
--- USE lab_db;
+USE Lab_Db;
 
 /*
 1.建立主表 demo_create_table.sql
@@ -12,10 +12,9 @@
 -- 2.1. 同時複製 主表 的 結構、紀錄
 
 -- create table and initialize data
-DROP TABLE IF EXISTS account_history;
-CREATE TABLE IF NOT EXISTS account_history 
-SELECT * FROM account
-;
+DROP TABLE IF EXISTS Account_history;
+CREATE TABLE IF NOT EXISTS Account_history ; 
+SELECT * FROM account ;
 
 -- 2.2.2. 在 歷史表中加入序號欄位、並加上 PK 限制
 ALTER TABLE account_history

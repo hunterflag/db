@@ -1,3 +1,9 @@
+-- CREATE DATABASE IF NOT EXISTS <資料庫名稱>;
+CREATE DATABASE IF NOT EXISTS Lab_Db;
+USE Lab_Db;
+-- DROP DATABASE IF EXISTS <資料庫名稱> ;
+-- DROP DATABASE IF EXISTS Lab_Db ;
+
 /* 0. <codeStyle.編碼風格>.慣用:
 	0.1. 關鍵字: 不區分大小寫, 慣用全大寫
     0.2. 表格名: 採大駝峰
@@ -6,8 +12,6 @@
 */
 -- ==========================================================================
 -- --------------------------------------------------------------------------
-
--- USE lab_db;
 
 /* 1. <mainTable.主表> 建立程序 & 注意事項:
 2.建立異動紀錄表(歷史紀錄表) _history _log
