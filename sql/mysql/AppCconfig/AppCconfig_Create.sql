@@ -1,21 +1,23 @@
-use labDB;
-
-
+USE labDB;
 
 -- 1. 建立主表.xxx
-drop table if exists app_config;
-create table if not exists app_config (
+DROP TABLE IF EXISTS AppConfig;
+CREATE TABLE IF NOT EXISTS AppConfig (    
+    tag				VARCHAR(100)	NULL,
+	key_name		VARCHAR(100) 	NOT NULL,
+    key_value		VARCHAR(100)	NULL,
+    default_value	VARCHAR(100)	NULL, 
     
-    scope			varchar(100)	default "",
-	key_name		varchar(100) 	not null,
-    key_value		varchar(100)	not null default "",
-    
-    serial_no 		integer 		not null UNIQUE auto_increment,		
-    created_time	datetime 		not null DEFAULT CURRENT_TIMESTAMP,
-    modified_time	timestamp		not null DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    no 				INTEGER 		PRIMARY KEY UNIQUE AUTO_INCREMENT,		
+    created_time	DATETIME 		NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    modified_time	TIMESTAMP		NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	
-    constraint primary_key primary key (scope, key_name)
+    CONSTRAINT unique_key UNIQUE KEY (tag, key_name)
 );
+
+
+
+
 
 alter table app_config
 	  drop primary key
@@ -28,14 +30,14 @@ alter table app_config
 
 
 
-insert into app_config (key_name, key_value) values("app.db.user", "developer");
-insert into app_config (key_name, key_value) values("app.db.password", "developer");
-insert into app_config (key_name, key_value) values("app.user", "123");
-insert into app_config (key_name, key_value) values("app.password", "123");
-insert into app_config (scope, key_name, key_value) values("developer.hunter", "app.db.user", "developer");
-insert into app_config (scope, key_name, key_value) values("developer.hunter", "app.db.password", "developer");
-insert into app_config (scope, key_name, key_value) values("developer.hunter", "app.user", "123");
-insert into app_config (scope, key_name, key_value) values("developer.hunter", "app.password", "123");
+INSERT INTO AppConfig (key_name, key_value)		 VALUES("app.db.user", "developer");
+INSERT INTO AppConfig (key_name, key_value)		 VALUES("app.db.password", "developer");
+INSERT INTO AppConfig (key_name, key_value)		 VALUES("app.user", "123");
+INSERT INTO AppConfig (key_name, key_value)		 VALUES("app.password", "123");
+INSERT INTO AppConfig (tag, key_name, key_value) VALUES("developer.hunter", "app.db.user", "developer");
+INSERT INTO AppConfig (tag, key_name, key_value) VALUES("developer.hunter", "app.db.password", "developer");
+INSERT INTO AppConfig (tag, key_name, key_value) VALUES("developer.hunter", "app.user", "123");
+INSERT INTO AppConfig (tag, key_name, key_value) VALUES("developer.hunter", "app.password", "123");
 
 
 select * 
