@@ -79,3 +79,7 @@ SET SQL_SAFE_UPDATES=1;
 
 -- 表格.重置資料.清除
 TRUNCATE TABLE Account;
+
+SELECT * FROM Account;
+
+INSERT INTO Account VALUES (SELECT a.* FROM Account a);
