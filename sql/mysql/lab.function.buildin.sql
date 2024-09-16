@@ -12,12 +12,6 @@ SELECT;
 SELECT ascii("0");
 SELECT ascii("01");
 
--- 日期時間 = 日期 ＋ 時間
-SELECT system_date();
-SELECT now() 日期時間
-    , current_date() 日期
-    , current_time() 時間;
-
 -- flow control 
 -- CASE ... WHEN ... THEN ... ELSE ... END
 SELECT 
