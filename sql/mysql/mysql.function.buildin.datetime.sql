@@ -77,14 +77,28 @@ SELECT date("2024-09-01")						只輸入日期
 ;
 
 -- SELECT date(2024, 09, 16);
+SELECT datetime("2024-09-16 12:34:56");
 SELECT date("2024/09/16 12:34:56");
 SELECT time("12:34:56") 						只輸入時間
-	, timestamp(time("12:34:56"))				自動補當天日期
+	, timestamp(time("12:34:56"))				`自動補當天日期(從當天算)`
 	, timestamp(time("2024/09/18 12:34:56")) 	輸入日期也無效
 ;
 
 SELECT timestamp(0);
 SELECT timestamp(now());
+
+SELECT makedate("2020", "7");
+SELECT makedate(2021, 60);
+SELECT makedate(2020, 60), makedate(2021, 60);
+SELECT maketime(12, 34, 56)				通常以為
+	, maketime(34, 56, 12)				其實可超過24時
+	, timestamp(maketime(34, 56, 12))	`日期自動轉換+1日`
+    , date(maketime(34, 56, 12))		日期
+;
+
+SELECT datediff(maketime(34, 56, 12), now());	
+
+SELECT timestamp(maketime(34, 56, 12));
 
 SELECT timestamp(time("2024/09/18 12:34:56"));
 SELECT timestamp(now())						預設沒有微秒
