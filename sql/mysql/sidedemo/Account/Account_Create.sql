@@ -1,6 +1,6 @@
 -- CREATE DATABASE IF NOT EXISTS <資料庫名稱>;
 CREATE DATABASE IF NOT EXISTS Lab_Db;
-USE Lab_Db;
+USE Sidedemo;
 -- DROP DATABASE IF EXISTS <資料庫名稱> ;
 -- DROP DATABASE IF EXISTS Lab_Db ;
 
@@ -32,12 +32,15 @@ CREATE TABLE IF NOT EXISTS Account (
 	no				INTEGER			PRIMARY KEY	AUTO_INCREMENT 	COMMENT "序號",
     name			VARCHAR(100) 	NOT NULL					COMMENT "名稱",
     password		VARCHAR(100)	NOT NULL	DEFAULT "0000"	COMMENT "密碼",
-    modifiable_flag	BOOLEAN			NOT NULL DEFAULT TRUE		COMMENT "可修改",
-    deleted_flag	BOOLEAN 		NOT NULL DEFAULT FALSE		COMMENT "已刪除",
+
+    modifiable	    BOOLEAN			NOT NULL DEFAULT b(1)		COMMENT, name, password,  "可修改",
+    deleted         BOOLEAN 		NOT NULL DEFAULT FALSE		COMMENT "已刪除",
 
 	created_time	DATETIME 		NOT NULL 	DEFAULT now()	COMMENT "建立時間",
     modified_time 	TIMESTAMP		NOT NULL 	DEFAULT  CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT "最後異動時間"
 );
+
+SELECT no, name, password, modifiable, deleted, created_time, modified_time FROM Account; 
 
 -- 表格.刪除
 DROP TABLE IF EXISTS Account;
