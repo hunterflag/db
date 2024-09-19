@@ -33,8 +33,8 @@ CREATE TABLE IF NOT EXISTS Account (
     name			VARCHAR(100) 	NOT NULL					COMMENT "名稱",
     password		VARCHAR(100)	NOT NULL	DEFAULT "0000"	COMMENT "密碼",
 
-    modifiable	    BOOLEAN			NOT NULL DEFAULT b(1)		COMMENT, name, password,  "可修改",
-    deleted         BOOLEAN 		NOT NULL DEFAULT FALSE		COMMENT "已刪除",
+--    modifiable	    BOOLEAN			NOT NULL DEFAULT TRUE		COMMENT, name, password,  "可修改",
+--    deleted         BOOLEAN 		NOT NULL DEFAULT FALSE		COMMENT "已刪除",
 
 	created_time	DATETIME 		NOT NULL 	DEFAULT now()	COMMENT "建立時間",
     modified_time 	TIMESTAMP		NOT NULL 	DEFAULT  CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT "最後異動時間"

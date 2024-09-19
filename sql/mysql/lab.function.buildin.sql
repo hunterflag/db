@@ -10,8 +10,8 @@ SE IF EXISTS LAB_DB;
 
 SELECT;
 -- 字串
-SELECT ascii("0");
-SELECT ascii("01");
+SELECT ascii("0")
+     , ascii("01");
 
 -- flow control 
 -- CASE ... WHEN ... THEN ... ELSE ... END
