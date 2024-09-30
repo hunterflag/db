@@ -1,0 +1,20 @@
+SET @schema_name='sidedemo';
+
+/*  DATABASE vs SCHEMA
+DROP DATABASE IF EXISTS sidedemo;
+CREATE DATABASE IF NOT EXISTS sidedemo;
+*/
+
+DROP SCHEMA IF EXISTS sidedemo;
+CREATE SCHEMA IF NOT EXISTS sidedemo;
+USE sidedemo;
+
+SET AUTOCOMMIT=0; 
+/*
+ROLLBACK;
+COMMIT;
+SET AUTOCOMMIT=1;   -- default
+*/
+
+SELECT @@autocommit 系統級, @AUTOCOMMIT, AUTOCOMMIT ;
+

@@ -1,0 +1,3 @@
+CREATE DATABASE IF NOT EXISTS lab_db;
+USE lab_db;
+-- DROP DATABASE IF EXISTS lab_db;
