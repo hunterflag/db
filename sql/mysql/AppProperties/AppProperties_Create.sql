@@ -1,4 +1,4 @@
-USE Lab_DB;
+USE LAB_DB;
 
 -- 1. 建立主表.xxx
 DROP TABLE IF EXISTS AppProperties;
@@ -17,11 +17,11 @@ CREATE TABLE IF NOT EXISTS AppProperties (
     CONSTRAINT unique_key UNIQUE KEY (prefix, name, suffix)
 );
 
-INSERT INTO AppProperties (prefix, name, suffix, value)
-	VALUES (NULL, "title", NULL,"demo title")
-		 , (NULL, "author", NULL, "Hunter Chen")
-         , (NULL, "company", NULL, "Subway Studio")
-         , (NULL, "support", NULL, "地鐵工坊")
+INSERT INTO AppProperties (name, value)
+	VALUES ("title", "demo title")
+		 , ("author", "Hunter Chen")
+         , ("company", "Subway Studio")
+         , ("support", "地鐵工坊")
 ;
 
 INSERT INTO AppProperties (name, value)	VALUES ("title", "demo title") ;
@@ -33,14 +33,14 @@ TRUNCATE AppProperties;
 
 DROP TABLE IF EXISTS AppProperties;
 
-INSERT INTO AppConfig (key_name, key_value)		 VALUES("app.db.user", "developer");
-INSERT INTO AppConfig (key_name, key_value)		 VALUES("app.db.password", "developer");
-INSERT INTO AppConfig (key_name, key_value)		 VALUES("app.user", "123");
-INSERT INTO AppConfig (key_name, key_value)		 VALUES("app.password", "123");
-INSERT INTO AppConfig (tag, key_name, key_value) VALUES("developer.hunter", "app.db.user", "developer");
-INSERT INTO AppConfig (tag, key_name, key_value) VALUES("developer.hunter", "app.db.password", "developer");
-INSERT INTO AppConfig (tag, key_name, key_value) VALUES("developer.hunter", "app.user", "123");
-INSERT INTO AppConfig (tag, key_name, key_value) VALUES("developer.hunter", "app.password", "123");
+INSERT INTO AppProperties (name, value)		 VALUES("app.db.user", "developer");
+INSERT INTO AppProperties (name, value)		 VALUES("app.db.password", "developer");
+INSERT INTO AppProperties (name, value)		 VALUES("app.user", "123");
+INSERT INTO AppProperties (name, value)		 VALUES("app.password", "123");
+INSERT INTO AppProperties (prefix, name, value) VALUES("developer.hunter", "app.db.user", "developer");
+INSERT INTO AppProperties (prefix, name, value) VALUES("developer.hunter", "app.db.password", "developer");
+INSERT INTO AppProperties (prefix, name, value) VALUES("developer.hunter", "app.user", "123");
+INSERT INTO AppProperties (prefix, name, value) VALUES("developer.hunter", "app.password", "123");
 
 
 select * 
@@ -50,10 +50,10 @@ from app_config
 
 
 update app_config 
-set key_value = "1234567", scope="email"
+set value = "1234567", scope="email"
 where 1=1
 	and scope = "email"
-    and key_name = "key"
+    and name = "key"
 ;
 
 select * from app_config;
@@ -78,7 +78,7 @@ select *
 from app_config_history
 where 1=1
 -- 	and scope="email"
---     and key_name="key"
+--     and name="key"
 ;	
 select * from app_config_history;	
 
@@ -87,7 +87,7 @@ select * from app_config_history;
 /*
 alter table app_config_history 
 drop primary key, 
-drop constraint key_name 
+drop constraint name 
 ;
 */
 -- 2.2.2. 在 歷史表中加入序號欄位、並加上 PK 限制
@@ -103,8 +103,8 @@ create trigger app_config_after_insert
 after insert
 on app_config for each row
 begin
-	insert into app_config_history (scope, key_name, key_value, serial_no, created_time, modified_time)
-		values (NEW.scope, NEW.key_name, NEW.key_value, NEW.serial_no, NEW.created_time, NEW.modified_time);
+	insert into app_config_history (scope, name, value, serial_no, created_time, modified_time)
+		values (NEW.scope, NEW.name, NEW.value, NEW.serial_no, NEW.created_time, NEW.modified_time);
 end 
 ||
 -- delimiter ;
@@ -115,8 +115,8 @@ create trigger app_config_after_update
 after update
 on app_config for each row
 begin
-	insert into app_config_history (scope, key_name, key_value, serial_no, created_time, modified_time)
-		values (NEW.scope, NEW.key_name, NEW.key_value, NEW.serial_no, NEW.created_time, NEW.modified_time);
+	insert into app_config_history (scope, name, value, serial_no, created_time, modified_time)
+		values (NEW.scope, NEW.name, NEW.value, NEW.serial_no, NEW.created_time, NEW.modified_time);
 end
 ||
 delimiter ;
